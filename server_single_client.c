@@ -84,7 +84,7 @@ int main(int argc, char** argv)
 
    mp3_send(client_socket, song_id, argv);
 
-   id_succes = recv(client_socket, &mp3_id, sizeof(mp3_id), 0); //f
+   id_succes = recv(client_socket, &mp3_id, sizeof(mp3_id), 0); //Line to Keep the client_socket active until all the TCP packets are recieved.
 
     // Close sockets
    close(client_socket);
@@ -96,14 +96,14 @@ int main(int argc, char** argv)
 void mp3_send(int client_socket, int song_id, char **argv){
 
    char dir[64] = ""; 
-   strcat(dir, argv[2]);
-   printf("selected directory: %s \n", dir);
+   strcat(dir, argv[2]);                        //formating the directory address 
+   printf("selected directory: %s \n", dir);   
 
    int count = song_id-1;
    struct dirent *de;  // Pointer for directory entry 
      // opendir() returns a pointer of DIR type.  
   
-   DIR *dr = opendir(dir); 
+   DIR *dr = opendir(dir);               
   
    if (dr == NULL)  // opendir returns NULL if couldn't open directory 
    { 
@@ -116,7 +116,7 @@ void mp3_send(int client_socket, int song_id, char **argv){
       // printf("%s\n", de->d_name);               //used to verify file order if necessary
    }   
 
-   strcat(dir, de->d_name);
+   strcat(dir, de->d_name);         //appending file name to end of directory address
    closedir(dr);
    
 
