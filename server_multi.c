@@ -126,7 +126,7 @@ void* new_client(void * arg){
 
    mp3_send(client_socket, song_id, global_argv);
 
-   id_succes = recv(client_socket, &mp3_id, sizeof(mp3_id), 0); //f
+   id_succes = recv(client_socket, &mp3_id, sizeof(mp3_id), 0); //code to keep client socket active until it is done recieving the TCP packets.
 
     // Close sockets
    close(client_socket);
